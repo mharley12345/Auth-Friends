@@ -16,10 +16,6 @@ class App extends Component {
     adding: false
   }
 
-  componentDidMount() {
-    this.props.fetch()
-  }
-
   newFriend = e => {
     e.persist();
     this.props.newFriend(this.state.newFriend);
@@ -44,9 +40,19 @@ class App extends Component {
   }
 
   render() {
+    if (this.props.loggedIn) {
+      this.props.fetch()
+    }
     return (
       <div className="App">
-        <div className='float'>
+        <div
+          className='float'
+          style={{
+            display: this.props.loggedIn ?
+              'block' :
+              'none'
+          }}
+        >
           <button
             onClick={() => {
               this.setState({
