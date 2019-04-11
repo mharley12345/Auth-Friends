@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, FETCHED, EDIT, DELETE, NEW_FRIEND } from '../actions';
+import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, FETCHED, EDIT, DELETE, NEW_FRIEND, LOGOUT } from '../actions';
 
 const initialState = {
     friends: [],
@@ -46,6 +46,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 friends: action.payload
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                loggedIn: false
             }
         default:
             return state;

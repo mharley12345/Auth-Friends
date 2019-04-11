@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from './components/Login'
 import Friend from './components/Friend'
-import { fetch, newFriend } from './actions'
+import { fetch, newFriend, logout } from './actions'
 import './App.scss';
 import NewFriend from './components/NewFriend';
 
@@ -61,6 +61,12 @@ class App extends Component {
 
             }}
           >New Friend?</button>
+          <button
+            onClick={() => {
+              this.props.logout();
+              localStorage.clear();
+            }}
+          >Log Out?</button>
         </div>
         <header>
           <h1>Friends</h1>
@@ -100,4 +106,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { fetch, newFriend })(App);
+export default connect(mapStateToProps, { fetch, newFriend, logout })(App);

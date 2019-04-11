@@ -5,7 +5,8 @@ export const LOGIN = 'LOGIN',
     FETCHED = 'FETCHED',
     EDIT = 'EDIT',
     DELETE = 'DELETE',
-    NEW_FRIEND = 'NEW_FRIEND';
+    NEW_FRIEND = 'NEW_FRIEND',
+    LOGOUT = 'LOGOUT';
 
 export const login = creds => dispatch => {
     axiosAuth()
@@ -56,4 +57,10 @@ export const newFriend = nf => dispatch => {
             payload: res.data
         }))
         .catch(err => console.log(err))
+}
+
+export const logout = () => dispatch => {
+    dispatch({
+        type: LOGOUT
+    })
 }
