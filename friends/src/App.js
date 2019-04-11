@@ -2,27 +2,81 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from './components/Login'
 import Friend from './components/Friend'
-import { fetch } from './actions'
+import { fetch, newFriend } from './actions'
 import './App.scss';
+import NewFriend from './components/NewFriend';
 
 class App extends Component {
+  state = {
+    newFriend: {
+      name: '',
+      age: '',
+      email: ''
+    },
+    adding: false
+  }
+
+  componentDidMount() {
+    this.props.fetch()
+  }
+
+  newFriend = e => {
+    e.persist();
+    this.props.newFriend(this.state.newFriend);
+    this.setState({
+      adding: false,
+      newFriend: {
+        name: '',
+        age: '',
+        email: ''
+      }
+    });
+  }
+
+  handleChanges = e => {
+    this.setState({
+      ...this.state,
+      newFriend: {
+        ...this.state.newFriend,
+        [e.target.name]: e.target.value
+      }
+    })
+  }
+
   render() {
-    console.log('App', this.props)
     return (
       <div className="App">
+        <div className='float'>
+          <button
+            onClick={() => {
+              this.setState({
+                adding: true
+              })
+
+            }}
+          >New Friend?</button>
+        </div>
         <header>
           <h1>Friends</h1>
         </header>
-        {!this.props.loggedIn ?
-          <Login /> :
+        <div className='friends'>
+          {!this.props.loggedIn ?
+            <Login /> :
 
-          !this.props.fetched ?
-            'Fetching...' && this.props.fetch() :
-            this.props.friends.map((friend, id) => (
-              <Friend friend={friend} key={id} />
-            ))
-        }
-        <h2>{this.props.loggedIn && `Welcome, `}</h2>
+            this.state.adding ?
+              <NewFriend
+                newFriend={this.newFriend}
+                handleChanges={this.handleChanges}
+                state={this.state}
+              />
+              :
+              this.props.friends.map((friend, id) => (
+                <Friend friend={friend} key={id} />
+              ))
+          }
+        </div>
+        <h2>{this.props.loggedIn &&
+          `Welcome, ${JSON.parse(localStorage.getItem('user')).username}`}</h2>
         <footer>
           <h6>Created by William C Umstead Jr</h6>
         </footer>
@@ -40,4 +94,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { fetch })(App);
+export default connect(mapStateToProps, { fetch, newFriend })(App);

@@ -33,6 +33,11 @@ class Login extends Component {
 
 
     render() {
+        if (localStorage.getItem('userToken')) {
+            return (
+                <h2 onLoad={this.props.login(JSON.parse(localStorage.getItem('user')))}>Logging You Back In...</h2>
+            )
+        }
         return (
             <div>
                 <form onSubmit={this.login}>
@@ -47,7 +52,7 @@ class Login extends Component {
                         value={this.state.password}
                         name='password'
                         onChange={this.handleChanges}
-                        type='current-password'
+                        type='password'
                     />
                     <button onSubmit={this.login}>Login</button>
                 </form>

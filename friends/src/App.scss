@@ -1,29 +1,51 @@
 .App {
+    width: 100%;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
 
+    .float {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #19197090;
+        padding: 25px;
+        border-radius: 50%;
+    }
+
     header {
-        max-width: 800px;
+        position: fixed;
+        top: 0;
+        box-shadow: 0 10px 25px black;
+        max-width: 1000px;
         width: 100%;
         display: flex;
         justify-content: center;
         margin: 0 auto;
         background: midnightblue;
-        border-radius: 5px 5px 50% 50%;
+        border-radius: 0 0 50% 50%;
         color: whitesmoke;
     }
 
+    .friends {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 100px;
+    }
+
     footer {
-        max-width: 800px;
+        box-shadow: 5px 10px 15px black;
+        max-width: 1000px;
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin: 0 auto;
         background: whitesmoke;
-        border-radius: 50% 50% 5px 5px;
+        border-radius: 50% 50% 0 0;
         color: midnightblue;
     }
 }
