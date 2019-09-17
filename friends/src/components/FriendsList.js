@@ -1,39 +1,16 @@
-import React,{Component} from 'react';
-import moment from 'moment';
-import Loader from 'react-loader-spinner';
 
-import { axiosWithAuth } from '../utils/AxiosWithAuth';
+import React from 'react';
 
-class FriendsList extends Component{
-    state = {
-        friends:[
-            {id:'',
-             name:'',
-            age : '',
-        email : ''
-    }
+import Friend from './Friend';
 
-        ]
-    };
-    componentDidMount(){
-        this.getData()
-    }
-    getData = () =>{
-        axiosWithAuth()
-      .get('/data')
-      .then(res=>{
-          console.log(res.data)
-      })
-        .catch(err=>console.log(err))   
-     
-    }
-
-render(){
+const FriendsList = props => {
     return (
-        <div className="friendsList">
+        <ul>
+            {props.friends.map(friend => {
+                return <Friend key={friend.id} friend={friend} />;
+            })}
+        </ul>
+    );
+};
 
-        </div>
-    )
-}
-}
-export default FriendsList
+export default FriendsList;
