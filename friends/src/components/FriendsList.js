@@ -1,44 +1,28 @@
-import {React,useState,useEffect} from 'react';
-import moment from 'moment';
-import Loader from 'react-loader-spinner';
+import React, { useState, useEffect } from 'react';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+ const FriendList = () => {
+     const [friends, setFriends] = useState([]);
 
+     const jackDaniels = res => {
+         setFriends(res)
+     }
 
-  const FriendsList = () =>{
-  const[name , setName] = useState('')
-  const[id, setId] = useState('')
-  const[email, setEmail] = useState('')
-
-
-  const getData = () => {
-     axiosWithAuth()
-      .get('/friends')
-      .then(res => {
-       res.data.map(friend =>{
-         return setName(res.data.name),  setId(res.data.id), setEmail(res.data.email)
-       })
-         
-       
-      })
-  
-      .catch(err => console.log(err));
-  };
-
-  
-
-
-  
-
-    return(
-
-          <div className='friends'>
-              <div>Name :{name}</div>
-              <div>email:{email}</div>
-               
-      </div>
+     useEffect(() => {
+      
+    axiosWithAuth().get("/friends").then(res=> jackDaniels(res.data) ).catch(error => console.error(error))
+     }, [])
+    return (
+        <div>
+         { friends.map((item,key) => (
+            <div key={key}>
+                <p>{item.name} </p>
+                <p>{item.age} </p>
+                <p>{item.email} </p>
+              
+              </div>
+          ))}
+        </div>
     )
-    }
-    
-
-export default FriendsList;
+}
+export default FriendList;
