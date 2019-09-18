@@ -1,7 +1,7 @@
 import React from 'react'
 import {withFormik, Form, Field} from 'formik'
 import * as Yup from 'yup';
-import axiosWithAuth from "../utils/axiosWithAuth"
+import {axiosWithAuth} from "../utils/axiosWithAuth"
 
 
  const LoginForm = ({ touched, errors, isSubmitting, values }) => {
@@ -22,7 +22,6 @@ import axiosWithAuth from "../utils/axiosWithAuth"
             {touched.password && errors.password && <p>{errors.password}</p>}
                 <label htmlFor="password">Password: </label>
                 <Field 
-                    autoComplete="off"
                     type="password"
                     name="password"
                     placeholder="Password"
@@ -38,7 +37,7 @@ import axiosWithAuth from "../utils/axiosWithAuth"
                 className="submit-button"
                 type="submit"
             >
-                Submit &rarr;
+                Submit 
             </button>
         </div>
         </Form>
@@ -55,14 +54,14 @@ const FormikLoginForm = withFormik({
 
     validationSchema: Yup.object().shape({
         username: Yup.string().required(),
-        password: Yup.string().min(3, 'Password must be at least 3 characters').required('Password Required')
+        password: Yup.string().min( 3, 'Password must be at least 3 characters').required('Password Required')
     }),
 
     handleSubmit(values,formikBag){
         const url = "/login"
         return axiosWithAuth().post(url,values).then(res => {
             localStorage.setItem("token", res.data.payload);
-            formikBag.props.history.push("/friends-list")
+            formikBag.props.history.push("/protected")
             formikBag.resetForm()
         })
 

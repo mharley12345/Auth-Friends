@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link,Switch } from 'react-router-dom';
 
-import UserLogin from './components/UserLogin';
+
+import FormikLogin from './components/LoginForm'
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -20,8 +21,8 @@ function App() {
           </ul>
            <Switch>
             <PrivateRoute exact path='/protected' component={FriendsList}/>
-            <Route path='/login' component={UserLogin} />
-            <Route component={UserLogin} />
+            <Route path='/login' component={FormikLogin} />
+            <Route component={FormikLogin} />
             </Switch>
           </div>
         
