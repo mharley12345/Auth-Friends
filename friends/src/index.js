@@ -8,10 +8,5 @@ import App from './App';
 
 
 
-ReactDOM.render(
- 
-        <App />
-
-    ,document.getElementById('root')
-);
+ReactDOM.Render(<App />,document.getElementById('root'));
 
