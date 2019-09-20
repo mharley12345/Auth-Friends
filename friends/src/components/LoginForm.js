@@ -1,7 +1,7 @@
 import React from 'react'
 import {withFormik, Form, Field} from 'formik'
 import * as Yup from 'yup';
-import {axiosWithAuth} from "../utils/AxiosWithAuth"
+import {axiosWithAuth} from "../utils/axiosWithAuth"
 
 
  const LoginForm = ({ touched, errors, isSubmitting, values }) => {
@@ -28,7 +28,7 @@ import {axiosWithAuth} from "../utils/AxiosWithAuth"
 
                 />
             </div>
-            <button type="submit">Register</button>
+     
         </div>
         <div>
                 {isSubmitting && <p>Loading...</p>}
@@ -47,8 +47,8 @@ import {axiosWithAuth} from "../utils/AxiosWithAuth"
 const FormikLoginForm = withFormik({
     mapPropsToValues() {
        return{
-        username: "Mike",
-        password: "Mike"
+        username: "",
+        password: ""
        };
     },
 
