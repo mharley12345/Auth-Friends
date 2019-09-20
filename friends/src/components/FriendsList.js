@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {axiosWithAuth} from '../utils/axiosWithAuth';
+import {axiosWithAuth} from '../utils/AxiosWithAuth';
 
  const FriendList = () => {
      const [friends, setFriends] = useState([]);
@@ -9,7 +9,7 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
      }
 
      useEffect(() => {
-      
+
     axiosWithAuth().get("/friends").then(res=> jackDaniels(res.data) ).catch(error => console.error(error))
      }, [])
     return (
@@ -19,7 +19,7 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
                 <p>{item.name} </p>
                 <p>{item.age} </p>
                 <p>{item.email} </p>
-              
+
               </div>
           ))}
         </div>

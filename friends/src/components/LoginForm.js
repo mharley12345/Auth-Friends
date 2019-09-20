@@ -1,7 +1,7 @@
 import React from 'react'
 import {withFormik, Form, Field} from 'formik'
 import * as Yup from 'yup';
-import {axiosWithAuth} from "../utils/axiosWithAuth"
+import {axiosWithAuth} from "../utils/AxiosWithAuth"
 
 
  const LoginForm = ({ touched, errors, isSubmitting, values }) => {
@@ -11,21 +11,21 @@ import {axiosWithAuth} from "../utils/axiosWithAuth"
             <div className="login-group" >
                {touched.name && errors.name && <p>{errors.username}</p>}
                <label htmlFor="username">Username: </label>
-                <Field 
+                <Field
                     type="text"
                     name="username"
-                    placeholder="Username" 
-                    
+                    placeholder="Username"
+
                 />
             </div>
             <div className="login-group">
             {touched.password && errors.password && <p>{errors.password}</p>}
                 <label htmlFor="password">Password: </label>
-                <Field 
+                <Field
                     type="password"
                     name="password"
                     placeholder="Password"
-                
+
                 />
             </div>
             <button type="submit">Register</button>
@@ -37,7 +37,7 @@ import {axiosWithAuth} from "../utils/axiosWithAuth"
                 className="submit-button"
                 type="submit"
             >
-                Submit 
+                Submit
             </button>
         </div>
         </Form>
@@ -49,7 +49,7 @@ const FormikLoginForm = withFormik({
        return{
         username: "Mike",
         password: "Mike"
-       }; 
+       };
     },
 
     validationSchema: Yup.object().shape({
